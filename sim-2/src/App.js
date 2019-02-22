@@ -1,20 +1,18 @@
 import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
-import logo from "./logo.svg";
-import ComponentName from "./components/";
+// import { Switch, Route } from "react-router-dom";
+import Dashboard from "./components/Dashboard";
+import Header from "./components/Header";
+import routes from "./components/routes";
+import House from "./components/House";
+
 import "./App.css";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => <ComponentName someprop={value} />}
-          />
-        </Switch>
+        <Header />
+        {routes}
       </div>
     );
   }

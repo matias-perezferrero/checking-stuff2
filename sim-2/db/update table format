@@ -1,0 +1,4 @@
+alter table houses
+add column image_url text,
+add column monthly_mortgage_amount numeric,
+add column desired_rent numeric;
