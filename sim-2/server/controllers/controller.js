@@ -1,14 +1,27 @@
 module.exports = {
-  funciton: (req, res) => {
+  getAllHouses: (req, res) => {
     const db = req.app.get("db");
+
+    db.get_all_houses().then(resp => {
+      res.status(200).send(resp);
+    });
   },
-  funciton: (req, res) => {
+
+  addHouse: (req, res) => {
     const db = req.app.get("db");
+    const { property_name, address, city, state, zip } = req.body;
+
+    db.add_house([property_name, address, city, state, zip]).then(resp => {
+      res.status(200).send(resp);
+    });
   },
-  funciton: (req, res) => {
+
+  deleteHouse: (req, res) => {
     const db = req.app.get("db");
-  },
-  funciton: (req, res) => {
-    const db = req.app.get("db");
+    const { id } = req.params;
+
+    db.delete_house([id]).then(resp => {
+      res.status(200).send(resp);
+    });
   }
 };
