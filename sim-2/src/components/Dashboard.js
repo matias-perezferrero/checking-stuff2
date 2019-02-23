@@ -52,6 +52,9 @@ class Dashboard extends Component {
           city={house.city}
           state={house.state}
           zip={house.zip}
+          image_url={house.image_url}
+          monthly_mortgage_amount={house.monthly_mortgage_amount}
+          desired_rent={house.desired_rent}
           handleDeleteHouse={this.handleDeleteHouse}
         />
       );

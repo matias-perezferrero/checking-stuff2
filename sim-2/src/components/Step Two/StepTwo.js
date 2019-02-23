@@ -1,30 +1,26 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { connect } from "react-redux";
+import { changeImageURL } from "../../ducks/reducer";
 
 class StepTwo extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      image_url: ""
-    };
-  }
-
-  handleInputChange = e => {
-    this.setState({
-      [e.target.id]: e.target.value
-    });
-  };
+  // handleInputChange = e => {
+  //   this.setState({
+  //     [e.target.id]: e.target.value
+  //   });
+  // };
 
   render() {
+    const { changeImageURL } = this.props;
     return (
       <div>
         <h1>Step Two</h1>
         <input
-          id="image_url"
+          value={this.props.image_url}
+          // id="image_url"
           placeholder="Image Url"
-          onChange={this.handleInputChange}
+          onChange={e => changeImageURL(e.target.value)}
         />
 
         <Link to="/wizard/step1">
@@ -39,4 +35,9 @@ class StepTwo extends Component {
   }
 }
 
-export default StepTwo;
+const mapStateToProps = state => state;
+
+export default connect(
+  mapStateToProps,
+  { changeImageURL }
+)(StepTwo);

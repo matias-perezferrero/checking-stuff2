@@ -1,64 +1,84 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { connect } from "react-redux";
+import {
+  changePropertyName,
+  changeAddress,
+  changeCity,
+  changeState,
+  changeZip
+} from "../../ducks/reducer";
 
 class StepOne extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      property_name: "",
-      address: "",
-      city: "",
-      state: "",
-      zip: 0
-    };
-  }
-
-  handleInputChange = e => {
-    console.log(e.target.id);
-    this.setState({
-      [e.target.id]: e.target.value
-    });
-  };
+  // handleInputChange = e => {
+  //   console.log(e.target.id);
+  //   this.setState({
+  //     [e.target.id]: e.target.value
+  //   });
+  // };
 
   render() {
+    const {
+      changePropertyName,
+      changeAddress,
+      changeCity,
+      changeState,
+      changeZip
+    } = this.props;
     return (
       <div>
         <h1>Step One</h1>
         <input
           placeholder="property name"
-          id="property_name"
-          onChange={this.handleInputChange}
+          value={this.props.property_name}
+          // id="property_name"
+          onChange={e => changePropertyName(e.target.value)}
         />
         <input
           placeholder="address"
-          id="address"
-          onChange={this.handleInputChange}
+          value={this.props.address}
+          // id="address"
+          onChange={e => changeAddress(e.target.value)}
         />
-        <input placeholder="city" id="city" onChange={this.handleInputChange} />
+        <input
+          placeholder="city"
+          value={this.props.city}
+          // id="city"
+          onChange={e => changeCity(e.target.value)}
+        />
         <input
           placeholder="state"
-          id="state"
+          value={this.props.state}
+          // id="state"
           type="text"
           maxLength="2"
-          onChange={this.handleInputChange}
+          onChange={e => changeState(e.target.value)}
         />
         <input
           placeholder="zip code"
-          id="zip"
+          value={this.props.zip}
+          // id="zip"
           type="number"
-          onChange={this.handleInputChange}
+          onChange={e => changeZip(e.target.value)}
         />
 
         <Link to="/wizard/step2">
           <button>Next Step</button>
         </Link>
-
-        <button onClick={this.handleAddHouse}>Complete</button>
       </div>
     );
   }
 }
 
-export default StepOne;
+const mapStateToProps = state => state;
+//   const {property_name, address, city, state, zip} = state
+
+//   return {
+//     property_name, address, city, state, zip
+// };
+
+export default connect(
+  mapStateToProps,
+  { changePropertyName, changeAddress, changeCity, changeState, changeZip }
+)(StepOne);
